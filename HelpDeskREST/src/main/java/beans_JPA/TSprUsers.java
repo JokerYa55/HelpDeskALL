@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +19,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -25,6 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "t_spr_users")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TSprUsers.findAll", query = "SELECT t FROM TSprUsers t")
     , @NamedQuery(name = "TSprUsers.findById", query = "SELECT t FROM TSprUsers t WHERE t.id = :id")
@@ -38,22 +43,28 @@ public class TSprUsers implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
+    @XmlElement
     private Long id;
     @Basic(optional = false)
     @Column(name = "f_login")
+    @XmlElement
     private String fLogin;
     @Basic(optional = false)
     @Column(name = "f_pass")
+    @XmlElement
     private String fPass;
     @Basic(optional = false)
+    @XmlElement
     @Column(name = "f_name")
     private String fName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fUserId")
+    @XmlElement
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fUserId")    
     private Collection<TFirmUsers> tFirmUsersCollection;
-    @OneToMany(mappedBy = "fUserId")
-    private Collection<TIncident> tIncidentCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fUserId")
-    private Collection<TIncidentComment> tIncidentCommentCollection;
+//    @XmlTransient
+//    @OneToMany(mappedBy = "fUserId", fetch = FetchType.LAZY)
+//    private Collection<TIncident> tIncidentCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fUserId", fetch = FetchType.LAZY)
+//    private Collection<TIncidentComment> tIncidentCommentCollection;
 
     public TSprUsers() {
     }
@@ -109,21 +120,21 @@ public class TSprUsers implements Serializable {
         this.tFirmUsersCollection = tFirmUsersCollection;
     }
 
-    public Collection<TIncident> getTIncidentCollection() {
-        return tIncidentCollection;
-    }
+//    public Collection<TIncident> getTIncidentCollection() {
+//        return tIncidentCollection;
+//    }
+//
+//    public void setTIncidentCollection(Collection<TIncident> tIncidentCollection) {
+//        this.tIncidentCollection = tIncidentCollection;
+//    }
 
-    public void setTIncidentCollection(Collection<TIncident> tIncidentCollection) {
-        this.tIncidentCollection = tIncidentCollection;
-    }
-
-    public Collection<TIncidentComment> getTIncidentCommentCollection() {
-        return tIncidentCommentCollection;
-    }
-
-    public void setTIncidentCommentCollection(Collection<TIncidentComment> tIncidentCommentCollection) {
-        this.tIncidentCommentCollection = tIncidentCommentCollection;
-    }
+//    public Collection<TIncidentComment> getTIncidentCommentCollection() {
+//        return tIncidentCommentCollection;
+//    }
+//
+//    public void setTIncidentCommentCollection(Collection<TIncidentComment> tIncidentCommentCollection) {
+//        this.tIncidentCommentCollection = tIncidentCommentCollection;
+//    }
 
     @Override
     public int hashCode() {

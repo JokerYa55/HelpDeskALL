@@ -111,7 +111,7 @@ public interface daoInterface<T, V> {
      * @return
      */
     default public List<T> getList(String jpqName, Class<T> cl) {
-        System.out.println("getList => " + jpqName + " cl = " + cl.getName());
+        System.out.println("getList => " + jpqName + " cl = " + cl.getName() + " em => " + getEM());
         List<T> res = null;
         try {
             EntityManager em = getEM();
