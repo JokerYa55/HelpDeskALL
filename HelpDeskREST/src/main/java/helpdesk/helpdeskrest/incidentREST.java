@@ -5,19 +5,12 @@
  */
 package helpdesk.helpdeskrest;
 
-import DAO_JPA.TIncidentDAO;
-import DAO_JPA.TSprUsersDAO;
-import beans_JPA.TIncident;
 import beans_JPA.TSprUsers;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -34,7 +27,7 @@ import org.jboss.logging.Logger;
 public class incidentREST {
     
     //@PersistenceContext(unitName = "helpDesk_HelpDeskREST_war_1PU")
-    EntityManager em;
+    //EntityManager em;
     
     Logger log = Logger.getLogger(getClass().getName());
     
@@ -43,11 +36,13 @@ public class incidentREST {
     @RolesAllowed("video-rest-user")
     public List<TSprUsers> get() {
         log.debug("List");
-        Map<String, Object> param = new HashMap();
-        param.put("limit", 10);
-        this.em = Persistence.createEntityManagerFactory("helpDesk_REST").createEntityManager();
-        return ( new TSprUsersDAO(em)).getList("TSprUsers.findAll", TSprUsers.class, param);
-                //videoService.list();
+        List<TSprUsers> res = null;
+//        Map<String, Object> param = new HashMap();
+//        param.put("limit", 10);
+//        this.em = Persistence.createEntityManagerFactory("helpDesk_REST").createEntityManager();
+//        return ( new TSprUsersDAO(em)).getList("TSprUsers.findAll", TSprUsers.class, param);
+//                //videoService.list();
+        return res;
     }
     
 }
