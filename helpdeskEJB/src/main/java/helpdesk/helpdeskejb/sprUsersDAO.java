@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
 public class sprUsersDAO implements sprUsersDAOInterface {
 
     @PersistenceContext // Внедряет EntityManager
-    private EntityManager entityManager;
+    private EntityManager em;
 
     @Override
     public void addUser(TSprUsers user) {
