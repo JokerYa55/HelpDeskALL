@@ -6,13 +6,21 @@
 package helpdesk.helpdeskejb;
 
 import beans_JPA.TSprUsers;
-import javax.ejb.Local;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author vasil
  */
-@Local
-public interface sprUsersDAO {
-    public void addUser(TSprUsers user);
+public class sprUsersDAO implements sprUsersDAOInterface {
+
+    @PersistenceContext // Внедряет EntityManager
+    private EntityManager entityManager;
+
+    @Override
+    public void addUser(TSprUsers user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
