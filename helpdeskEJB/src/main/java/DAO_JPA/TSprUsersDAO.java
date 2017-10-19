@@ -7,7 +7,9 @@ package DAO_JPA;
 
 import beans_JPA.TSprUsers;
 import interfaces.daoInterface;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 
@@ -15,9 +17,11 @@ import org.apache.log4j.Logger;
  *
  * @author vasil
  */
+@Stateless
 public class TSprUsersDAO implements daoInterface<TSprUsers, Long> {
 
     private final Logger log = Logger.getLogger(getClass().getName());
+    @PersistenceContext
     private final EntityManager em;
 
     public TSprUsersDAO(EntityManager em) {

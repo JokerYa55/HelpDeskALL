@@ -7,14 +7,19 @@ package interfaces;
 
 import java.util.List;
 import java.util.Map;
+import javax.ejb.Local;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
  *
  * @author vasil
+ * @param <T>
+ * @param <V>
  */
+@Local
 public interface daoInterface<T, V> {
 
     /**
@@ -28,6 +33,7 @@ public interface daoInterface<T, V> {
      * @param Item
      * @return
      */
+    @Transactional
     default public T addItem(T Item) {
         T res = null;
         try {
@@ -47,6 +53,7 @@ public interface daoInterface<T, V> {
      * @return
      */
 
+    @Transactional
     default public boolean deleteItem(T Item) {
         boolean res = true;
         try {
@@ -66,7 +73,7 @@ public interface daoInterface<T, V> {
      * @param Item
      * @return
      */
-
+    @Transactional
     default public boolean updateItem(T Item) {
         System.out.println("updateItem => " + Item);
         boolean res = false;
@@ -91,6 +98,7 @@ public interface daoInterface<T, V> {
      * @param cl
      * @return
      */
+    @Transactional
     default public T getItem(long id, String jpqName, Class<T> cl) {
         T res = null;
         try {
@@ -110,6 +118,7 @@ public interface daoInterface<T, V> {
      * @param cl
      * @return
      */
+    @Transactional
     default public List<T> getList(String jpqName, Class<T> cl) {
         System.out.println("getList => " + jpqName + " cl = " + cl.getName() + " em => " + getEM());
         List<T> res = null;
@@ -125,6 +134,7 @@ public interface daoInterface<T, V> {
         return res;
     }
 
+    @Transactional
     default public List<T> getList(String jpqName, Class<T> cl, Map<String, Object> params) {
         System.out.println("getList => " + jpqName + " cl = " + cl.getName());
         List<T> res = null;
@@ -164,6 +174,7 @@ public interface daoInterface<T, V> {
      * @param cl
      * @return
      */
+    @Transactional
     default public List<T> getList(int startIdx, int countRec, String jpqName, Class<T> cl) {
         List<T> res = null;
         try {
