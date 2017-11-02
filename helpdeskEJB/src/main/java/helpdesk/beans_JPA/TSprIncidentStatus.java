@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beans_JPA;
+package helpdesk.beans_JPA;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,12 +25,12 @@ import javax.persistence.Table;
  * @author vasil
  */
 @Entity
-@Table(name = "t_spr_firm")
+@Table(name = "t_spr_incident_status")
 @NamedQueries({
-    @NamedQuery(name = "TSprFirm.findAll", query = "SELECT t FROM TSprFirm t")
-    , @NamedQuery(name = "TSprFirm.findById", query = "SELECT t FROM TSprFirm t WHERE t.id = :id")
-    , @NamedQuery(name = "TSprFirm.findByFName", query = "SELECT t FROM TSprFirm t WHERE t.fName = :fName")})
-public class TSprFirm implements Serializable {
+    @NamedQuery(name = "TSprIncidentStatus.findAll", query = "SELECT t FROM TSprIncidentStatus t")
+    , @NamedQuery(name = "TSprIncidentStatus.findById", query = "SELECT t FROM TSprIncidentStatus t WHERE t.id = :id")
+    , @NamedQuery(name = "TSprIncidentStatus.findByFName", query = "SELECT t FROM TSprIncidentStatus t WHERE t.fName = :fName")})
+public class TSprIncidentStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,19 +41,17 @@ public class TSprFirm implements Serializable {
     @Basic(optional = false)
     @Column(name = "f_name")
     private String fName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fFirmId")
-    private Collection<TFirmUsers> tFirmUsersCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fFirmId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fIncidentStatusId", fetch = FetchType.LAZY)
     private Collection<TIncident> tIncidentCollection;
 
-    public TSprFirm() {
+    public TSprIncidentStatus() {
     }
 
-    public TSprFirm(Long id) {
+    public TSprIncidentStatus(Long id) {
         this.id = id;
     }
 
-    public TSprFirm(Long id, String fName) {
+    public TSprIncidentStatus(Long id, String fName) {
         this.id = id;
         this.fName = fName;
     }
@@ -73,14 +72,6 @@ public class TSprFirm implements Serializable {
         this.fName = fName;
     }
 
-    public Collection<TFirmUsers> getTFirmUsersCollection() {
-        return tFirmUsersCollection;
-    }
-
-    public void setTFirmUsersCollection(Collection<TFirmUsers> tFirmUsersCollection) {
-        this.tFirmUsersCollection = tFirmUsersCollection;
-    }
-
     public Collection<TIncident> getTIncidentCollection() {
         return tIncidentCollection;
     }
@@ -99,10 +90,10 @@ public class TSprFirm implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TSprFirm)) {
+        if (!(object instanceof TSprIncidentStatus)) {
             return false;
         }
-        TSprFirm other = (TSprFirm) object;
+        TSprIncidentStatus other = (TSprIncidentStatus) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -111,7 +102,9 @@ public class TSprFirm implements Serializable {
 
     @Override
     public String toString() {
-        return "beans_JPA.TSprFirm[ id=" + id + " ]";
+        return fName;
     }
+
+    
     
 }

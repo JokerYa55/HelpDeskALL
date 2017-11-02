@@ -3,23 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO_JPA;
+package helpdesk.DAO_JPA;
 
-import beans_JPA.TFirmUsers;
-import interfaces.daoInterface;
+import helpdesk.beans_JPA.TIncidentComment;
+import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 /**
  *
  * @author vasil
  */
-public class TFirmUsersDAO implements daoInterface<TFirmUsers, Long> {
+public class TIncidentCommentDAO implements daoInterface<TIncidentComment, Long> {
 
     private final Logger log = Logger.getLogger(getClass().getName());
-    private final EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-    public TFirmUsersDAO(EntityManager em) {
+    public TIncidentCommentDAO() {
+    }
+
+    public TIncidentCommentDAO(EntityManager em) {
         this.em = em;
     }
 

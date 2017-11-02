@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO_JPA;
+package helpdesk.DAO_JPA;
 
-import beans_JPA.TIncident;
-import interfaces.daoInterface;
+import helpdesk.beans_JPA.TIncident;
+import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 /**
@@ -17,7 +18,11 @@ import org.apache.log4j.Logger;
 public class TIncidentDAO implements daoInterface<TIncident, Long> {
 
     private final Logger log = Logger.getLogger(getClass().getName());
-    private final EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
+
+    public TIncidentDAO() {
+    }
 
     public TIncidentDAO(EntityManager em) {
         this.em = em;

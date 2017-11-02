@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="helpdeskEJB" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.1.240:5432/helpdesk"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="123"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="helpdesk_EJB" transaction-type="JTA">
+        <jta-data-source>java:/helpDeskDS</jta-data-source>
+        <class>helpdesk.beans_JPA.TFirmUsers</class>
+        <class>helpdesk.beans_JPA.TSprFirm</class>
+        <class>helpdesk.beans_JPA.TSprService</class>
+        <class>helpdesk.beans_JPA.TIncidentComment</class>
+        <class>helpdesk.beans_JPA.TSprIncidentStatus</class>
+        <class>helpdesk.beans_JPA.TIncident</class>
+        <class>helpdesk.beans_JPA.TSprCommentType</class>
+        <class>helpdesk.beans_JPA.TSprUsers</class>
+        <class>helpdesk.beans_JPA.TFirmService</class>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+        </properties>
+    </persistence-unit>
 </persistence>

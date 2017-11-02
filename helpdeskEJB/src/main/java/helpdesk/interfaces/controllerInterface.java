@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package helpdesk.interfaces;
 
-import beans_JPA.TSprUsers;
+import helpdesk.beans_JPA.TSprUsers;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;

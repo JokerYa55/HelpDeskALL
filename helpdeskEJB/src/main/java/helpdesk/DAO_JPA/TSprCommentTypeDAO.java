@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO_JPA;
+package helpdesk.DAO_JPA;
 
-import beans_JPA.TSprCommentType;
-import interfaces.daoInterface;
+import helpdesk.beans_JPA.TSprCommentType;
+import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 /**
@@ -17,7 +18,11 @@ import org.apache.log4j.Logger;
 public class TSprCommentTypeDAO implements daoInterface<TSprCommentType, Long> {
 
     private final Logger log = Logger.getLogger(getClass().getName());
-    private final EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
+
+    public TSprCommentTypeDAO() {
+    }
 
     public TSprCommentTypeDAO(EntityManager em) {
         this.em = em;

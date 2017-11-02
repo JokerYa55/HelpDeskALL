@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beans_JPA;
+package helpdesk.beans_JPA;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -24,12 +24,12 @@ import javax.persistence.Table;
  * @author vasil
  */
 @Entity
-@Table(name = "t_spr_service")
+@Table(name = "t_spr_comment_type")
 @NamedQueries({
-    @NamedQuery(name = "TSprService.findAll", query = "SELECT t FROM TSprService t")
-    , @NamedQuery(name = "TSprService.findById", query = "SELECT t FROM TSprService t WHERE t.id = :id")
-    , @NamedQuery(name = "TSprService.findByFName", query = "SELECT t FROM TSprService t WHERE t.fName = :fName")})
-public class TSprService implements Serializable {
+    @NamedQuery(name = "TSprCommentType.findAll", query = "SELECT t FROM TSprCommentType t")
+    , @NamedQuery(name = "TSprCommentType.findById", query = "SELECT t FROM TSprCommentType t WHERE t.id = :id")
+    , @NamedQuery(name = "TSprCommentType.findByFName", query = "SELECT t FROM TSprCommentType t WHERE t.fName = :fName")})
+public class TSprCommentType implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,17 +40,17 @@ public class TSprService implements Serializable {
     @Basic(optional = false)
     @Column(name = "f_name")
     private String fName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fServiceId")
-    private Collection<TIncident> tIncidentCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fCommentTypeId")
+    private Collection<TIncidentComment> tIncidentCommentCollection;
 
-    public TSprService() {
+    public TSprCommentType() {
     }
 
-    public TSprService(Long id) {
+    public TSprCommentType(Long id) {
         this.id = id;
     }
 
-    public TSprService(Long id, String fName) {
+    public TSprCommentType(Long id, String fName) {
         this.id = id;
         this.fName = fName;
     }
@@ -71,12 +71,12 @@ public class TSprService implements Serializable {
         this.fName = fName;
     }
 
-    public Collection<TIncident> getTIncidentCollection() {
-        return tIncidentCollection;
+    public Collection<TIncidentComment> getTIncidentCommentCollection() {
+        return tIncidentCommentCollection;
     }
 
-    public void setTIncidentCollection(Collection<TIncident> tIncidentCollection) {
-        this.tIncidentCollection = tIncidentCollection;
+    public void setTIncidentCommentCollection(Collection<TIncidentComment> tIncidentCommentCollection) {
+        this.tIncidentCommentCollection = tIncidentCommentCollection;
     }
 
     @Override
@@ -89,10 +89,10 @@ public class TSprService implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TSprService)) {
+        if (!(object instanceof TSprCommentType)) {
             return false;
         }
-        TSprService other = (TSprService) object;
+        TSprCommentType other = (TSprCommentType) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +101,7 @@ public class TSprService implements Serializable {
 
     @Override
     public String toString() {
-        return "beans_JPA.TSprService[ id=" + id + " ]";
+        return "beans_JPA.TSprCommentType[ id=" + id + " ]";
     }
     
 }

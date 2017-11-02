@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package beans_JPA;
+package helpdesk.beans_JPA;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,13 +24,12 @@ import javax.persistence.Table;
  * @author vasil
  */
 @Entity
-@Table(name = "t_firm_service")
+@Table(name = "t_spr_service")
 @NamedQueries({
-    @NamedQuery(name = "TFirmService.findAll", query = "SELECT t FROM TFirmService t")
-    , @NamedQuery(name = "TFirmService.findById", query = "SELECT t FROM TFirmService t WHERE t.id = :id")
-    , @NamedQuery(name = "TFirmService.findByFFirmId", query = "SELECT t FROM TFirmService t WHERE t.fFirmId = :fFirmId")
-    , @NamedQuery(name = "TFirmService.findByFServiceId", query = "SELECT t FROM TFirmService t WHERE t.fServiceId = :fServiceId")})
-public class TFirmService implements Serializable {
+    @NamedQuery(name = "TSprService.findAll", query = "SELECT t FROM TSprService t")
+    , @NamedQuery(name = "TSprService.findById", query = "SELECT t FROM TSprService t WHERE t.id = :id")
+    , @NamedQuery(name = "TSprService.findByFName", query = "SELECT t FROM TSprService t WHERE t.fName = :fName")})
+public class TSprService implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,23 +38,21 @@ public class TFirmService implements Serializable {
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
-    @Column(name = "f_firm_id")
-    private long fFirmId;
-    @Basic(optional = false)
-    @Column(name = "f_service_id")
-    private long fServiceId;
+    @Column(name = "f_name")
+    private String fName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fServiceId")
+    private Collection<TIncident> tIncidentCollection;
 
-    public TFirmService() {
+    public TSprService() {
     }
 
-    public TFirmService(Long id) {
+    public TSprService(Long id) {
         this.id = id;
     }
 
-    public TFirmService(Long id, long fFirmId, long fServiceId) {
+    public TSprService(Long id, String fName) {
         this.id = id;
-        this.fFirmId = fFirmId;
-        this.fServiceId = fServiceId;
+        this.fName = fName;
     }
 
     public Long getId() {
@@ -63,20 +63,20 @@ public class TFirmService implements Serializable {
         this.id = id;
     }
 
-    public long getFFirmId() {
-        return fFirmId;
+    public String getFName() {
+        return fName;
     }
 
-    public void setFFirmId(long fFirmId) {
-        this.fFirmId = fFirmId;
+    public void setFName(String fName) {
+        this.fName = fName;
     }
 
-    public long getFServiceId() {
-        return fServiceId;
+    public Collection<TIncident> getTIncidentCollection() {
+        return tIncidentCollection;
     }
 
-    public void setFServiceId(long fServiceId) {
-        this.fServiceId = fServiceId;
+    public void setTIncidentCollection(Collection<TIncident> tIncidentCollection) {
+        this.tIncidentCollection = tIncidentCollection;
     }
 
     @Override
@@ -89,10 +89,10 @@ public class TFirmService implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TFirmService)) {
+        if (!(object instanceof TSprService)) {
             return false;
         }
-        TFirmService other = (TFirmService) object;
+        TSprService other = (TSprService) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -101,7 +101,7 @@ public class TFirmService implements Serializable {
 
     @Override
     public String toString() {
-        return "beans_JPA.TFirmService[ id=" + id + " ]";
+        return "beans_JPA.TSprService[ id=" + id + " ]";
     }
     
 }

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO_JPA;
+package helpdesk.DAO_JPA;
 
-import beans_JPA.TSprUsers;
-import interfaces.daoInterface;
+import helpdesk.beans_JPA.TSprUsers;
+import helpdesk.interfaces.daoInterface;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,7 +22,10 @@ public class TSprUsersDAO implements daoInterface<TSprUsers, Long> {
 
     private final Logger log = Logger.getLogger(getClass().getName());
     @PersistenceContext
-    private final EntityManager em;
+    private EntityManager em;
+
+    public TSprUsersDAO() {
+    }
 
     public TSprUsersDAO(EntityManager em) {
         this.em = em;
