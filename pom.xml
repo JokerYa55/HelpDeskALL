@@ -6,9 +6,10 @@
     <version>1</version>
     <packaging>pom</packaging>
     <modules>
-        <module>HelpDeskREST</module>
         <module>helpDesk_FX</module>
-    </modules>
+        <module>helpDeskEJB_DAO</module>
+    <module>helDeskREST</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

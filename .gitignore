@@ -1,0 +1,11 @@
+/helpdeskEJB/target/
+/helpdeskEE/nbproject/private/
+/helpdeskEE/helpdeskEE-war/nbproject/private/
+/helpdeskEE/helpdeskEE-ejb/nbproject/private/
+/helpdeskEE/build/
+/helpdeskEE/dist/
+/helpdeskEE/helpdeskEE-ejb/dist/
+/helpdeskEE/helpdeskEE-ejb/build/
+/helpdeskEE/helpdeskEE-war/build/
+/helpdeskEE/helpdeskEE-war/dist/
+/helDeskREST/target/
