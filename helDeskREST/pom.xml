@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-    <artifactId>HelpDeskAll</artifactId>
-    <groupId>helpDesk</groupId>
-    <version>1</version>
-  </parent>
+        <artifactId>HelpDeskAll</artifactId>
+        <groupId>helpDesk</groupId>
+        <version>1</version>
+    </parent>
 
     <groupId>helpDeskRest</groupId>
-    <artifactId>helDeskREST</artifactId>
+    <artifactId>helpDeskREST</artifactId>
     <version>1</version>
     <packaging>war</packaging>
 
-    <name>helDeskREST</name>
+    <name>helpDeskREST</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -29,7 +29,26 @@
     </dependencies>
 
     <build>
+        <finalName>helpdaskRest</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>compile</includeScope>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
