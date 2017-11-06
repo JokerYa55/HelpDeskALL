@@ -5,9 +5,13 @@
  */
 package helpdesk.helpdeskrest;
 
+import helpdesk.DAO.TSprUsersDAO;
+import helpdesk.bean.TSprUsers;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import org.jboss.logging.Logger;
 
 /**
@@ -19,12 +23,21 @@ import org.jboss.logging.Logger;
 public class restAPI {
 
     final Logger log = Logger.getLogger(getClass().getName());
-    
+
     @GET
-    @Path("\test")
+    @Path("/test")
     public String test() {
-        log.info("test");
         return "TEST";
+    }
+
+    @GET
+    @Path("/getUser")
+    @Produces(MediaType.APPLICATION_XML)
+    public TSprUsers getUser() {
+        TSprUsers res = null;
+        TSprUsersDAO dao = new TSprUsersDAO();
+        res = dao.getUser(new Long(5));
+        return res;
     }
 
 }
