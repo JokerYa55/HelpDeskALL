@@ -2,7 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="helpDeskRest_helpDeskREST_war_1PU" transaction-type="JTA">
     <jta-data-source>java:/helpDeskDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>helpdesk.bean.TFirmService</class>
+    <class>helpdesk.bean.TFirmUsers</class>
+    <class>helpdesk.bean.TIncident</class>
+    <class>helpdesk.bean.TIncidentComment</class>
+    <class>helpdesk.bean.TSprCommentType</class>
+    <class>helpdesk.bean.TSprFirm</class>
+    <class>helpdesk.bean.TSprIncidentStatus</class>
+    <class>helpdesk.bean.TSprService</class>
+    <class>helpdesk.bean.TSprUsers</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>
 </persistence>
