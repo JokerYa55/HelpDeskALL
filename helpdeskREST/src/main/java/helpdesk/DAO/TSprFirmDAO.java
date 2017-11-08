@@ -5,7 +5,7 @@
  */
 package helpdesk.DAO;
 
-import helpdesk.bean.TSprIncidentStatus;
+import helpdesk.bean.TSprFirm;
 import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -15,19 +15,19 @@ import org.jboss.logging.Logger;
  *
  * @author vasil
  */
-public class TSprIncidentStatusDAO implements daoInterface<TSprIncidentStatus, Long> {
+public class TSprFirmDAO implements daoInterface<TSprFirm, Long> {
 
     final Logger log = Logger.getLogger(getClass().getName());
-    
+
     private EntityManager em;
 
-    public TSprIncidentStatusDAO() {
+    public TSprFirmDAO() {
         this.em = Persistence.createEntityManagerFactory("helpDesk_JPA").createEntityManager();
     }
 
     @Override
     public EntityManager getEM() {
-        return this.em;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
