@@ -8,7 +8,7 @@
     <modules>
         <module>helpDesk_FX</module>
         <module>helpDeskEJB_DAO</module>
-    <module>helDeskREST</module>
+    <module>helpdeskREST</module>
   </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

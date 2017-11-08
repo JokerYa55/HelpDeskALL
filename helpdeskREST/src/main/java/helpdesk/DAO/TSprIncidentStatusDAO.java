@@ -3,34 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package helpdesk.heldeskrest;
+package helpdesk.DAO;
 
-import javax.ejb.Stateless;
+import helpdesk.bean.TSprIncidentStatus;
+import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
 import org.jboss.logging.Logger;
 
 /**
  *
  * @author vasil
  */
-@Stateless
-@Path("/")
-public class restAPI {
+public class TSprIncidentStatusDAO implements daoInterface<TSprIncidentStatus, Long> {
 
     final Logger log = Logger.getLogger(getClass().getName());
     
-    @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
-    @GET
-    @Path("/test")
-    public String test() {
-        log.info("test => " + em);
+    public TSprIncidentStatusDAO() {
+    }
 
-        return "TEST";
+    @Override
+    public EntityManager getEM() {
+        return this.em;
     }
 
 }

@@ -18,7 +18,7 @@ public class TSprServiceDAO implements daoInterface<TSprServiceDAO, Long> {
 
     final Logger log = Logger.getLogger(getClass().getName());
 
-    EntityManager em;
+    private EntityManager em;
 
     public TSprServiceDAO() {
         this.em = Persistence.createEntityManagerFactory("helpDesk_JPA").createEntityManager();
