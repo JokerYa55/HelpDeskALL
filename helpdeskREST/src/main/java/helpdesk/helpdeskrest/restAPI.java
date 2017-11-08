@@ -7,6 +7,7 @@ package helpdesk.helpdeskrest;
 
 import helpdesk.DAO.TSprUsersDAO;
 import helpdesk.bean.TSprUsers;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -32,12 +33,22 @@ public class restAPI {
 
     @GET
     @Path("/getUser")
-    @Produces(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public TSprUsers getUser() {
         TSprUsers res = null;
         TSprUsersDAO dao = new TSprUsersDAO();
-        res = dao.getUser(new Long(5));
+        res = dao.getItem(5, "TSprUsers.findById", TSprUsers.class);
         return res;
     }
 
+    @GET
+    @Path("/getUsersAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TSprUsers> getUsersAll() {
+        List<TSprUsers> res = null;
+        TSprUsersDAO dao = new TSprUsersDAO();
+        res = dao.getList("TSprUsers.findAll", TSprUsers.class);
+        return res;
+    }
+    
 }

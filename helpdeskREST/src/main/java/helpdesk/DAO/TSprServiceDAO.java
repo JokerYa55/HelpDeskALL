@@ -5,7 +5,6 @@
  */
 package helpdesk.DAO;
 
-import helpdesk.bean.TSprUsers;
 import helpdesk.interfaces.daoInterface;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -15,19 +14,19 @@ import org.jboss.logging.Logger;
  *
  * @author vasil
  */
-public class TSprUsersDAO implements daoInterface<TSprUsers, Long>{
+public class TSprServiceDAO implements daoInterface<TSprServiceDAO, Long> {
 
     final Logger log = Logger.getLogger(getClass().getName());
-    
+
     EntityManager em;
 
-    public TSprUsersDAO() {
+    public TSprServiceDAO() {
         this.em = Persistence.createEntityManagerFactory("helpDesk_JPA").createEntityManager();
     }
-
 
     @Override
     public EntityManager getEM() {
         return this.em;
     }
+
 }
