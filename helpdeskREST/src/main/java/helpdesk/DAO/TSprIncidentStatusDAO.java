@@ -6,28 +6,11 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TSprIncidentStatus;
-import helpdesk.interfaces.daoInterface;
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-import org.jboss.logging.Logger;
 
 /**
  *
  * @author vasil
  */
-public class TSprIncidentStatusDAO implements daoInterface<TSprIncidentStatus, Long> {
-
-    final Logger log = Logger.getLogger(getClass().getName());
-    
-    private EntityManager em;
-
-    public TSprIncidentStatusDAO() {
-        this.em = Persistence.createEntityManagerFactory("helpDesk_JPA").createEntityManager();
-    }
-
-    @Override
-    public EntityManager getEM() {
-        return this.em;
-    }
+public class TSprIncidentStatusDAO extends abstractClassDAO<TSprIncidentStatus, Long> {
 
 }

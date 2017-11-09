@@ -5,7 +5,9 @@
  */
 package helpdesk.helpdeskrest;
 
+import helpdesk.DAO.TSprCommentTypeDAO;
 import helpdesk.DAO.TSprUsersDAO;
+import helpdesk.bean.TSprCommentType;
 import helpdesk.bean.TSprUsers;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,6 +50,16 @@ public class restAPI {
         List<TSprUsers> res = null;
         TSprUsersDAO dao = new TSprUsersDAO();
         res = dao.getList("TSprUsers.findAll", TSprUsers.class);
+        return res;
+    }
+    
+    @GET
+    @Path("/getCommentTypeAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<TSprCommentType> getCommentTypeAll() {
+        List<TSprCommentType> res = null;
+        TSprCommentTypeDAO dao = new TSprCommentTypeDAO();
+        res = dao.getList("TSprCommentType.findAll", TSprCommentType.class);
         return res;
     }
     

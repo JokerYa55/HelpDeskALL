@@ -5,12 +5,12 @@
  */
 package helpdesk.DAO;
 
-import helpdesk.bean.TSprUsers;
+import helpdesk.bean.TSprCommentType;
 
 /**
  *
  * @author vasil
  */
-public class TSprUsersDAO extends abstractClassDAO<TSprUsers, Long> {
+public class TSprCommentTypeDAO extends abstractClassDAO<TSprCommentType, Long> {
 
 }
