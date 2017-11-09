@@ -5,10 +5,12 @@
  */
 package helpdesk.DAO;
 
+import helpdesk.bean.TSprService;
+
 /**
  *
  * @author vasil
  */
-public class TSprServiceDAO extends abstractClassDAO<TSprServiceDAO, Long> {
+public class TSprServiceDAO extends abstractClassDAO<TSprService, Long> {
 
 }

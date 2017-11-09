@@ -30,4 +30,9 @@ public class abstractClassDAO<T, V> implements daoInterface<T, V> {
         return this.em;
     }
 
+    @Override
+    public Logger getLog() {
+        return this.log;
+    }
+
 }

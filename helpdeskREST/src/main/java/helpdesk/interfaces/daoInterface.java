@@ -9,11 +9,13 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
+import org.jboss.logging.Logger;
 
 /**
  *
  * @author vasil
+ * @param <T>
+ * @param <V>
  */
 public interface daoInterface<T, V> {
 
@@ -22,6 +24,8 @@ public interface daoInterface<T, V> {
      * @return
      */
     public EntityManager getEM();
+
+    public Logger getLog();
 
     /**
      *
@@ -36,7 +40,7 @@ public interface daoInterface<T, V> {
             em.merge(Item);
             //em.getTransaction().commit();
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         return res;
     }
@@ -46,7 +50,6 @@ public interface daoInterface<T, V> {
      * @param Item
      * @return
      */
-
     default public boolean deleteItem(T Item) {
         boolean res = true;
         try {
@@ -56,7 +59,7 @@ public interface daoInterface<T, V> {
             //em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         return res;
     }
@@ -66,9 +69,8 @@ public interface daoInterface<T, V> {
      * @param Item
      * @return
      */
-
     default public boolean updateItem(T Item) {
-        System.out.println("updateItem => " + Item);
+        getLog().info("updateItem => " + Item);
         boolean res = false;
         try {
             EntityManager em = getEM();
@@ -79,7 +81,7 @@ public interface daoInterface<T, V> {
             //em.getTransaction().commit();
         } catch (Exception e) {
             res = false;
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         return res;
     }
@@ -92,6 +94,7 @@ public interface daoInterface<T, V> {
      * @return
      */
     default public T getItem(long id, String jpqName, Class<T> cl) {
+        getLog().info("getItem");
         T res = null;
         try {
             EntityManager em = getEM();
@@ -99,7 +102,7 @@ public interface daoInterface<T, V> {
             namedQuery.setParameter("id", id);
             res = namedQuery.getSingleResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         return res;
     }
@@ -111,7 +114,7 @@ public interface daoInterface<T, V> {
      * @return
      */
     default public List<T> getList(String jpqName, Class<T> cl) {
-        System.out.println("getList => " + jpqName + " cl = " + cl.getName());
+        getLog().info("getList => " + jpqName + " cl = " + cl.getName());
         List<T> res = null;
         try {
             EntityManager em = getEM();
@@ -119,14 +122,14 @@ public interface daoInterface<T, V> {
             //namedQuery.setParameter("id", id);
             res = namedQuery.getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         System.out.println("res => " + res.size());
         return res;
     }
 
     default public List<T> getList(String jpqName, Class<T> cl, Map<String, Object> params) {
-        System.out.println("getList => " + jpqName + " cl = " + cl.getName());
+        getLog().info("getList => " + jpqName + " cl = " + cl.getName());
         List<T> res = null;
         try {
             EntityManager em = getEM();
@@ -150,9 +153,9 @@ public interface daoInterface<T, V> {
                 res = namedQuery.setMaxResults(plimit).getResultList();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
-        System.out.println("res => " + res.size());
+        getLog().info("res => " + res.size());
         return res;
     }
 
@@ -165,6 +168,7 @@ public interface daoInterface<T, V> {
      * @return
      */
     default public List<T> getList(int startIdx, int countRec, String jpqName, Class<T> cl) {
+        getLog().info("getList");
         List<T> res = null;
         try {
             EntityManager em = getEM();
@@ -172,7 +176,7 @@ public interface daoInterface<T, V> {
             //namedQuery.setParameter("id", id);            
             res = namedQuery.setFirstResult(startIdx).setMaxResults(countRec).getResultList();
         } catch (Exception e) {
-            e.printStackTrace();
+            getLog().log(Logger.Level.ERROR, e);
         }
         return res;
     }
