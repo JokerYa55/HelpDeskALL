@@ -65,18 +65,18 @@ public class TIncident implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fDateCreated;
     @JoinColumn(name = "f_firm_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private TSprFirm fFirmId;
     @JoinColumn(name = "f_incident_status_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private TSprIncidentStatus fIncidentStatusId;
     @JoinColumn(name = "f_service_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private TSprService fServiceId;
     @JoinColumn(name = "f_user_id", referencedColumnName = "id")
     @ManyToOne
     private TSprUsers fUserId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIncident")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "idIncident")
     private Collection<TIncidentComment> tIncidentCommentCollection;
 
     public TIncident() {
