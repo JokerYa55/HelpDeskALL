@@ -5,7 +5,7 @@
  */
 package helpdesk.DAO;
 
-import helpdesk.interfaces.daoInterface;
+import ru.sso.interfaces.daoInterface;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import org.jboss.logging.Logger;
