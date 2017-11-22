@@ -7,6 +7,7 @@ package helpdesk.DAO;
 
 import ru.sso.interfaces.daoInterface;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.jboss.logging.Logger;
 
@@ -21,8 +22,8 @@ public class abstractClassDAO<T, V> implements daoInterface<T, V> {
     final Logger log = Logger.getLogger(getClass().getName());
     private EntityManager em;
 
-    public abstractClassDAO() {
-        this.em = Persistence.createEntityManagerFactory("helpDesk_JPA").createEntityManager();
+    public abstractClassDAO(EntityManager em) {
+        this.em = em;
     }
 
     @Override

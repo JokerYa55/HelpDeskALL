@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TSprIncidentStatus;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TSprIncidentStatusDAO extends abstractClassDAO<TSprIncidentStatus, Long> {
+
+    public TSprIncidentStatusDAO(EntityManager em) {
+        super(em);
+    }
 
 }

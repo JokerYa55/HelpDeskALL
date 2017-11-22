@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TSprCommentType;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TSprCommentTypeDAO extends abstractClassDAO<TSprCommentType, Long> {
+
+    public TSprCommentTypeDAO(EntityManager em) {
+        super(em);
+    }
 
 }

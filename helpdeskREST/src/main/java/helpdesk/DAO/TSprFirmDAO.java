@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TSprFirm;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TSprFirmDAO extends abstractClassDAO<TSprFirm, Long> {
+
+    public TSprFirmDAO(EntityManager em) {
+        super(em);
+    }
 
 }

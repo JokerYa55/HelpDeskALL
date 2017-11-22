@@ -17,6 +17,9 @@ import helpdesk.bean.TSprService;
 import helpdesk.bean.TSprUsers;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,6 +36,8 @@ import org.jboss.logging.Logger;
 public class restAPI {
 
     final Logger log = Logger.getLogger(getClass().getName());
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory("helpDesk_JPA");
+    private EntityManager em = null;
 
     @GET
     @Path("/test")
@@ -45,9 +50,15 @@ public class restAPI {
     @Path("/getUser")
     @Produces(MediaType.APPLICATION_JSON)
     public TSprUsers getUser() {
+
         TSprUsers res = null;
-        TSprUsersDAO dao = new TSprUsersDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprUsersDAO dao = new TSprUsersDAO(em);
         res = dao.getItem(5, "TSprUsers.findById", TSprUsers.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -56,8 +67,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TSprUsers> getUsersAll() {
         List<TSprUsers> res = null;
-        TSprUsersDAO dao = new TSprUsersDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprUsersDAO dao = new TSprUsersDAO(em);
         res = dao.getList("TSprUsers.findAll", TSprUsers.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -67,8 +83,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public TSprCommentType getCommentType(@PathParam("id") Long id) {
         TSprCommentType res = null;
-        TSprCommentTypeDAO dao = new TSprCommentTypeDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprCommentTypeDAO dao = new TSprCommentTypeDAO(em);
         res = dao.getItem(id, "TSprCommentType.findById", TSprCommentType.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -77,19 +98,29 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TSprCommentType> getCommentTypeAll() {
         List<TSprCommentType> res = null;
-        TSprCommentTypeDAO dao = new TSprCommentTypeDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprCommentTypeDAO dao = new TSprCommentTypeDAO(em);
         res = dao.getList("TSprCommentType.findAll", TSprCommentType.class);
+        em.clear();
+        em.close();
         return res;
     }
 
-    // обработка инцидентов
+// обработка инцидентов
     @GET
     @Path("/getIncident/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public TIncident getIncident(@PathParam("id") Long id) {
         TIncident res = null;
-        TIncidentDAO dao = new TIncidentDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TIncidentDAO dao = new TIncidentDAO(em);
         res = dao.getItem(id, "TIncident.findById", TIncident.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -98,8 +129,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TIncident> getIncidentAll() {
         List<TIncident> res = null;
-        TIncidentDAO dao = new TIncidentDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TIncidentDAO dao = new TIncidentDAO(em);
         res = dao.getList("TIncident.findAll", TIncident.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -109,8 +145,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public TSprService getService(@PathParam("id") Long id) {
         TSprService res = null;
-        TSprServiceDAO dao = new TSprServiceDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprServiceDAO dao = new TSprServiceDAO(em);
         res = dao.getItem(id, "TSprService.findById", TSprService.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -119,8 +160,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TSprService> getServiceAll() {
         List<TSprService> res = null;
-        TSprServiceDAO dao = new TSprServiceDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprServiceDAO dao = new TSprServiceDAO(em);
         res = dao.getList("TSprService.findAll", TSprService.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -130,8 +176,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public TSprFirm getFirm(@PathParam("id") Long id) {
         TSprFirm res = null;
-        TSprFirmDAO dao = new TSprFirmDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprFirmDAO dao = new TSprFirmDAO(em);
         res = dao.getItem(id, "TSprFirm.findById", TSprFirm.class);
+        em.clear();
+        em.close();
         return res;
     }
 
@@ -140,8 +191,13 @@ public class restAPI {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TSprFirm> getFirmAll() {
         List<TSprFirm> res = null;
-        TSprFirmDAO dao = new TSprFirmDAO();
+        if (em == null) {
+            em = factory.createEntityManager();
+        }
+        TSprFirmDAO dao = new TSprFirmDAO(em);
         res = dao.getList("TSprFirm.findAll", TSprFirm.class);
+        em.clear();
+        em.close();
         return res;
     }
 

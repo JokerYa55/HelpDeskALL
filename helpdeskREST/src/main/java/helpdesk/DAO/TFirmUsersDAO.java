@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TFirmUsers;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TFirmUsersDAO extends abstractClassDAO<TFirmUsers, Long> {
+
+    public TFirmUsersDAO(EntityManager em) {
+        super(em);
+    }
 
 }

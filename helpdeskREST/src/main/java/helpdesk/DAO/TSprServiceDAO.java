@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TSprService;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TSprServiceDAO extends abstractClassDAO<TSprService, Long> {
+
+    public TSprServiceDAO(EntityManager em) {
+        super(em);
+    }
 
 }

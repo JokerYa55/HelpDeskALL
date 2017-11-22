@@ -6,11 +6,16 @@
 package helpdesk.DAO;
 
 import helpdesk.bean.TIncident;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vasil
  */
 public class TIncidentDAO extends abstractClassDAO<TIncident, Long> {
+
+    public TIncidentDAO(EntityManager em) {
+        super(em);
+    }
 
 }
