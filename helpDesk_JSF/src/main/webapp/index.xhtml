@@ -6,12 +6,15 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
+        <h:form>
         <h:panelGrid columns="2">
             <h:outputText value="Пользователь"/>
             <h:inputText value="#{userSessionController.userName}"/>            
             <h:outputText value="Пароль"/>
             <h:inputText value="#{userSessionController.password}"/>
         </h:panelGrid>
+            <h:commandButton value="Вход" action="main"/>
+        </h:form>
     </h:body>
 </html>
 
