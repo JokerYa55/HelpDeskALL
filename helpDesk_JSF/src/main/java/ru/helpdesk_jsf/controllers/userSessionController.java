@@ -6,12 +6,10 @@
 package ru.helpdesk_jsf.controllers;
 
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -24,21 +22,23 @@ public class userSessionController {
     /**
      * Creates a new instance of userSessionController
      */
-    
     Logger log = Logger.getLogger(getClass().getName());
-    
-    @Inject
-    applicationController appController;
-    
+
+    @ManagedProperty("#{applicationController}")
+    private applicationController appController;
+
     private String userName;
     private String password;
-    private String sessionID;    
+    private String sessionID;
     //private EntityManager em = appController.getEmFactory().createEntityManager();
-    
 
     public userSessionController() {
-        log.info("userSessionController app => " + appController);    
-//        log.info("userSessionController em => " + em);    
+        log.info("userSessionController em => ");
+    }
+
+    @PostConstruct
+    public void init() {
+        log.info("userSessionController app => " + appController);
     }
 
     public String getUserName() {
@@ -63,6 +63,14 @@ public class userSessionController {
 
     public void setSessionID(String sessionID) {
         this.sessionID = sessionID;
+    }
+
+    public applicationController getAppController() {
+        return appController;
+    }
+
+    public void setAppController(applicationController appController) {
+        this.appController = appController;
     }
 
 }

@@ -23,11 +23,16 @@ public class applicationController {
     /**
      * Creates a new instance of applicationController
      */
-    private EntityManagerFactory emFactory = Persistence.createEntityManagerFactory("helpDesk_JPA");
+    private EntityManagerFactory emFactory = null;
     Logger log = Logger.getLogger(getClass().getName());
 
     public applicationController() {
+        log.info("**************************************************************");
         log.info("applicationController");
+        if (this.emFactory != null) {
+            this.emFactory = Persistence.createEntityManagerFactory("helpDesk_JPA");
+    
+        }
     }
 
     public EntityManagerFactory getEmFactory() {
