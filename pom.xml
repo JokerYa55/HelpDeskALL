@@ -9,6 +9,7 @@
         <module>helpDesk_FX</module>
         <module>helpDeskEJB_DAO</module>
     <module>helpdeskREST</module>
+    <module>helpDesk_JSF</module>
   </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
