@@ -12,6 +12,9 @@
     <class>ru.helpdesk_jsf.beans.TSprService</class>
     <class>ru.helpdesk_jsf.beans.TSprUsers</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+    </properties>
   </persistence-unit>
 </persistence>

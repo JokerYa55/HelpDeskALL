@@ -13,7 +13,7 @@
             <h:outputText value="Пароль"/>
             <h:inputText value="#{userSessionController.password}"/>
         </h:panelGrid>
-            <h:commandButton value="Вход" action="main"/>
+            <h:commandButton value="Вход" actionListener="#{userSessionController}" action="main"/>
         </h:form>
     </h:body>
 </html>

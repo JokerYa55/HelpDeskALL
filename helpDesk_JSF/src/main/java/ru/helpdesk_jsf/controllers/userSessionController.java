@@ -5,11 +5,17 @@
  */
 package ru.helpdesk_jsf.controllers;
 
+import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
+import ru.helpdesk_jsf.beans.TIncident;
 
 /**
  *
@@ -24,21 +30,23 @@ public class userSessionController {
      */
     Logger log = Logger.getLogger(getClass().getName());
 
-    @ManagedProperty("#{applicationController}")
-    private applicationController appController;
-
+//    @ManagedProperty("#{applicationController}")
+//    private applicationController appController;
     private String userName;
     private String password;
     private String sessionID;
+    private List<TIncident> incList;
     //private EntityManager em = appController.getEmFactory().createEntityManager();
+    private static EntityManagerFactory emf = null;
 
     public userSessionController() {
-        log.info("userSessionController em => ");
+        log.info("userSessionController");
+
     }
 
     @PostConstruct
     public void init() {
-        log.info("userSessionController app => " + appController);
+//        log.info("userSessionController app => " + appController);
     }
 
     public String getUserName() {
@@ -65,12 +73,30 @@ public class userSessionController {
         this.sessionID = sessionID;
     }
 
-    public applicationController getAppController() {
-        return appController;
+    public void getIncidentList() {
+        //List<TIncident> res = null;
+        EntityManager em = getEM();
+        em.getTransaction().begin();
+        TypedQuery<TIncident> namedQuery = em.createNamedQuery("TIncident.findAll", TIncident.class);
+        this.incList = namedQuery.getResultList();
+        em.getTransaction().commit();
+        //return res;
     }
 
-    public void setAppController(applicationController appController) {
-        this.appController = appController;
+    private EntityManager getEM() {
+        EntityManager res = null;
+        if (emf == null) {
+            emf = Persistence.createEntityManagerFactory("helpDesk_JPA");
+        }
+        res = emf.createEntityManager();
+        return res;
     }
+//    public applicationController getAppController() {
+//        return appController;
+//    }
+//
+//    public void setAppController(applicationController appController) {
+//        this.appController = appController;
+//    }
 
 }
