@@ -74,6 +74,7 @@ public class userSessionController {
     }
 
     public void getIncidentList() {
+        log.info("getIncidentList");
         //List<TIncident> res = null;
         EntityManager em = getEM();
         em.getTransaction().begin();
@@ -91,12 +92,13 @@ public class userSessionController {
         res = emf.createEntityManager();
         return res;
     }
-//    public applicationController getAppController() {
-//        return appController;
-//    }
-//
-//    public void setAppController(applicationController appController) {
-//        this.appController = appController;
-//    }
+
+    public List<TIncident> getIncList() {
+        return incList;
+    }
+
+    public void setIncList(List<TIncident> incList) {
+        this.incList = incList;
+    }
 
 }
