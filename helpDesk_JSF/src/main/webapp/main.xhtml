@@ -39,7 +39,7 @@
 
             <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="carDetail" style="text-align:center;">
-                    <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                    <p:panelGrid columns="2">
                         <h:outputText value="Id:" />
                         <h:outputText value="#{userSessionController.selectedIncident.id}" />
 
@@ -48,8 +48,8 @@
 
                         <h:outputText value="Firm:" />
                         <h:outputText value="#{userSessionController.selectedIncident.FFirmId.FName}"/>
-
                     </p:panelGrid>
+
                 </p:outputPanel>
             </p:dialog>
 

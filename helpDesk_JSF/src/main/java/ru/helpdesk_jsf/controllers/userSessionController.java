@@ -8,13 +8,16 @@ package ru.helpdesk_jsf.controllers;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import org.primefaces.event.SelectEvent;
 import ru.helpdesk_jsf.beans.TIncident;
 
 /**
@@ -36,6 +39,7 @@ public class userSessionController {
     private String password;
     private String sessionID;
     private List<TIncident> incList;
+    private TIncident selectedIncident;
     //private EntityManager em = appController.getEmFactory().createEntityManager();
     private static EntityManagerFactory emf = null;
 
@@ -46,7 +50,6 @@ public class userSessionController {
 
     @PostConstruct
     public void init() {
-//        log.info("userSessionController app => " + appController);
     }
 
     public String getUserName() {
@@ -73,6 +76,28 @@ public class userSessionController {
         this.sessionID = sessionID;
     }
 
+    public List<TIncident> getIncList() {
+        return incList;
+    }
+
+    public void setIncList(List<TIncident> incList) {
+        this.incList = incList;
+    }
+
+    public TIncident getSelectedIncident() {
+        return selectedIncident;
+    }
+
+    public void setSelectedIncident(TIncident selectedIncident) {
+        this.selectedIncident = selectedIncident;
+    }
+
+    public void onRowSelect(SelectEvent event) {
+        log.info(event.getObject().toString());
+        FacesMessage msg = new FacesMessage("Car Selected", ((TIncident) event.getObject()).getId().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+
     public void getIncidentList() {
         log.info("getIncidentList");
         //List<TIncident> res = null;
@@ -92,13 +117,4 @@ public class userSessionController {
         res = emf.createEntityManager();
         return res;
     }
-
-    public List<TIncident> getIncList() {
-        return incList;
-    }
-
-    public void setIncList(List<TIncident> incList) {
-        this.incList = incList;
-    }
-
 }
