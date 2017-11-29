@@ -2,31 +2,58 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>helpDesk</title>
     </h:head>
     <h:body>
         Добро пожаловать : #{userSessionController.userName} 
         size => #{userSessionController.incList.size()}
-        <p:dataTable value="#{userSessionController.incList}" 
-                     var="item"  
-                     rows="12" 
-                     paginator="true">
-            <p:column>
-                #{item.id}
-            </p:column>
-            <p:column>
-                #{item.FDate}
-            </p:column>
-            <p:column>
-                #{item.FFirmId.FName}
-            </p:column>
-            <p:column>
-                #{item.FIncidentStatusId.FName}
-            </p:column>
-        </p:dataTable> 
+        <h:form id="form">
+            <p:dataTable id="singleDT" 
+                         value="#{userSessionController.incList}" 
+                         var="item"  
+                         rows="12" 
+                         paginator="true"
+                         selectionMode="single"
+                         selection="#{userSessionController.selectedIncident}" 
+                         rowKey="#{item.id}">
+                <p:column  headerText="Id">
+                    #{item.id}
+                </p:column>
+                <p:column  headerText="Date">
+                    #{item.FDate}
+                </p:column>
+                <p:column  headerText="Firm">
+                    #{item.FFirmId.FName}
+                </p:column>
+                <p:column  headerText="Status">
+                    #{item.FIncidentStatusId.FName}
+                </p:column>
 
+                <f:facet name="footer">
+                    <p:commandButton process="singleDT" update=":form:carDetail" icon="ui-icon-search" value="View" oncomplete="PF('carDialog').show()" />
+                </f:facet>
+            </p:dataTable> 
+
+            <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                <p:outputPanel id="carDetail" style="text-align:center;">
+                    <p:panelGrid  columns="2" rendered="#{not empty dtSelectionView.selectedCar}" columnClasses="label,value">
+                        <h:outputText value="Id:" />
+                        <h:outputText value="#{userSessionController.selectedIncident.id}" />
+
+                        <h:outputText value="Date" />
+                        <h:outputText value="#{userSessionController.selectedIncident.FDate}" />
+
+                        <h:outputText value="Firm:" />
+                        <h:outputText value="#{userSessionController.selectedIncident.FFirmId.FName}"/>
+
+                    </p:panelGrid>
+                </p:outputPanel>
+            </p:dialog>
+
+        </h:form>
     </h:body>
 </html>
 
