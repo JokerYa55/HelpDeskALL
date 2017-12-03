@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,18 +66,18 @@ public class TIncident implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fDateCreated;
     @JoinColumn(name = "f_firm_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TSprFirm fFirmId;
     @JoinColumn(name = "f_incident_status_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TSprIncidentStatus fIncidentStatusId;
     @JoinColumn(name = "f_service_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private TSprService fServiceId;
     @JoinColumn(name = "f_user_id", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TSprUsers fUserId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idIncident")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "idIncident")
     private List<TIncidentComment> tIncidentCommentList;
 
     public TIncident() {
