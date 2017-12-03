@@ -19,16 +19,19 @@
                          selectionMode="single"
                          selection="#{userSessionController.selectedIncident}" 
                          rowKey="#{item.id}">
-                <p:column  headerText="Id">
+                <p:column  headerText="Id"  filterBy="#{item.id}">
                     #{item.id}
                 </p:column>
-                <p:column  headerText="Date">
-                    #{item.FDate}
+                <p:column  headerText="Date" filterBy="#{item.FDate}" sortBy="#{item.FDate}">
+                    <h:outputText value="#{item.FDate}">
+                        <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                    </h:outputText>
+                    
                 </p:column>
-                <p:column  headerText="Firm">
+                <p:column  headerText="Firm" filterBy="#{item.FFirmId.FName}">
                     #{item.FFirmId.FName}
                 </p:column>
-                <p:column  headerText="Status">
+                <p:column  headerText="Status" filterBy="#{item.FIncidentStatusId.FName}" sortBy="#{item.FIncidentStatusId.FName}">
                     #{item.FIncidentStatusId.FName}
                 </p:column>
 
@@ -37,21 +40,25 @@
                 </f:facet>
             </p:dataTable> 
 
+
             <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
                 <p:outputPanel id="carDetail" style="text-align:center;">
                     <p:panelGrid columns="2">
                         <h:outputText value="Id:" />
                         <h:outputText value="#{userSessionController.selectedIncident.id}" />
 
+                        <h:outputText value="Дата:" />
+                        <p:calendar id="mask" value="#{userSessionController.selectedIncident.FDate}" pattern="dd-MM-yyyy" mask="true" />
+
                         <h:outputText value="Date" />
-                        <h:outputText value="#{userSessionController.selectedIncident.FDate}" />
+                        <h:outputText value="#{userSessionController.selectedIncident.FDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
 
                         <h:outputText value="Firm:" />
                         <h:outputText value="#{userSessionController.selectedIncident.FFirmId.FName}"/>
-                    </p:panelGrid>
-
-                    
-                    
+                    </p:panelGrid>                    
+                    <p:commandButton value="Save" update=":form:carDetail" oncomplete="PF('carDialog').hide()" />
                 </p:outputPanel>
             </p:dialog>
 
