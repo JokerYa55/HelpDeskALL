@@ -25,8 +25,7 @@
                 <p:column  headerText="Date" filterBy="#{item.FDate}" sortBy="#{item.FDate}">
                     <h:outputText value="#{item.FDate}">
                         <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                    </h:outputText>
-                    
+                    </h:outputText>                    
                 </p:column>
                 <p:column  headerText="Firm" filterBy="#{item.FFirmId.FName}">
                     #{item.FFirmId.FName}
